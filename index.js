@@ -7,10 +7,8 @@ const app = express();
 const port = process.env.PORT || 8000;
 
 // middleware
-app.use(cors());
+app.use(cors({ origin: "*" }));
 app.use(express.json());
-
-
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.vqk54.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 
@@ -62,7 +60,7 @@ async function run() {
       const result = ordersCollection.find({});
       const allorders = await result.toArray();
       res.send(allorders);
-      console.log(allorders)
+      console.log(allorders);
     });
 
     // Get my orders
